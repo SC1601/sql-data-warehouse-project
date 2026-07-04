@@ -1,9 +1,25 @@
+/*
+======================================================================
+Quality Checks
+======================================================================
+Script Purpose:
+    This script performs various quality checks for  data consistency, accuracy,
+    and standardization across the 'silver' schemas. It includes checks for:
+    - Null or duplicate primary keys
+    - Unwanted spaces in string fields
+    - Data standardization and consistency
+    - Invalid data ranges and orders
+    - Data consistency between related fields.
 
+Usage Notes:
+    - Run these checks after data loading silver layer.
+    - Investigate and resolve any discrepancies found during the checks.
+======================================================================
+*/
 
-
-
-
---crm_cust_info table
+-- =====================================================================
+-- Checking 'silver.crm_cust_info'
+-- =====================================================================
 
 --Check for Nulls or Duplicates in primary key
 --Expectation: No Result
@@ -53,8 +69,9 @@ from silver.crm_cust_info;
 select DISTINCT(cst_marital_status)
 from silver.crm_cust_info;
 
-
---crm_prd_info table
+-- =====================================================================
+-- Checking 'silver.crm_prd_info'
+-- =====================================================================
 
 --Check for Nulls or Duplicates in primary key
 --Expectation: No Result
@@ -92,13 +109,15 @@ where prd_end_dt < prd_start_dt;
 select prd_key
 from silver.crm_prd_info;
 
---crm_sales_details
+-- =====================================================================
+-- Checking 'silver.crm_sales_details'
+-- =====================================================================
 
+--Testing data consistency between related fields.
 select sls_prd_key
 from bronze.crm_sales_details
 where sls_prd_key 
 NOT IN (select prd_key from silver.crm_prd_info);
-
 
 --Check for Invalid Dates
 --Expectation: No Result
