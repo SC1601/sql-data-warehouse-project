@@ -1,9 +1,11 @@
 
-## Data Dictionery for Gold Layer
+# Data Dictionery for Gold Layer
 
-### Overview
+## Overview
 
 <sub>The gold layer is the business level data representation, structured to support analytical and reporting use cases. It consists of **dimension tables** and **fact tables** for specific business metrics.</sub>
+
+---
 
 **1. gold.dim_customers**
 
