@@ -20,7 +20,10 @@ Highlights:
         - average monthly spend
 ==============================================================================
 */
-
+IF OBJECT_ID ('gold.report_customers', 'V') IS NOT NULL
+   DROP VIEW gold.report_customers;
+GO
+    
 CREATE VIEW gold.report_customers AS
 
 WITH base_query as(
@@ -101,3 +104,4 @@ WITH base_query as(
              ELSE total_sales/ lifespan 
         END AS avg_monthly_spend
     FROM customer_aggregation
+GO
